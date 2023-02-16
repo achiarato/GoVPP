@@ -106,11 +106,9 @@ func SrPolicyAdd(ch api.Channel, Bsid ip_types.IP6Address, Isspray bool, Isencap
 	//func SrPolicyAdd(ch api.Channel) error {
 	fmt.Println("Adding SRv6 Policy")
 
-	IP6BSID := net.ParseIP("2001::3")
-	//IP6BSID := (Bsid)
-	//IP6BSID := net.ParseIP(Bsid)
-	IP6BSIDvpp := ToVppIP6Address(IP6BSID)
-
+	//IP6BSID := net.ParseIP("2001::3")
+	//IP6BSIDvpp := ToVppIP6Address(IP6BSID)
+	IP6BSIDvpp := (Bsid)
 	PolicyBsid := ip_types.IP6Address{}
 	PolicyBsid = IP6BSIDvpp
 	PolicySidList := [16]ip_types.IP6Address{}
@@ -118,6 +116,12 @@ func SrPolicyAdd(ch api.Channel, Bsid ip_types.IP6Address, Isspray bool, Isencap
 	//PolicySidList[1] = IP6BSIDvpp
 	PolicySidList[0] = Sids[0]
 	PolicySidList[1] = Sids[1]
+	PolicySidList[2] = Sids[0]
+	PolicySidList[3] = Sids[1]
+	PolicySidList[4] = Sids[0]
+	PolicySidList[5] = Sids[1]
+	PolicySidList[6] = Sids[0]
+	PolicySidList[7] = Sids[1]
 
 	fmt.Println("SID0", PolicySidList[0])
 	fmt.Println("SID1", PolicySidList[1])
