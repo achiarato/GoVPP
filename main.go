@@ -100,18 +100,24 @@ func ToVppIP6Address(addr net.IP) ip_types.IP6Address {
 	return ip
 }
 
-//func SrPolicyAdd(ch api.Channel, Bsid ip_types.IP6Address, Isspray bool, Isencap bool, Fibtable int, Sids [16]ip_types.IP6Address, Sidsweight int, Sidslen int) error {
-func SrPolicyAdd(ch api.Channel) error {
+//func SrPolicyAdd(ch api.Channel, Bsid ip_types.IP6Address, Isspray bool, Isencap bool, Fibtable int, Sids [16]ip_types.IP6Address, Sidslen int) error {
+func SrPolicyAdd(ch api.Channel, Bsid ip_types.IP6Address, Isspray bool, Isencap bool, Fibtable int, Sids [16]ip_types.IP6Address, Sidslen int) error {
+
+	//func SrPolicyAdd(ch api.Channel) error {
 	fmt.Println("Adding SRv6 Policy")
 
 	IP6BSID := net.ParseIP("2001::3")
+	//IP6BSID := (Bsid)
+	//IP6BSID := net.ParseIP(Bsid)
 	IP6BSIDvpp := ToVppIP6Address(IP6BSID)
 
 	PolicyBsid := ip_types.IP6Address{}
 	PolicyBsid = IP6BSIDvpp
 	PolicySidList := [16]ip_types.IP6Address{}
-	PolicySidList[0] = IP6BSIDvpp
-	PolicySidList[1] = IP6BSIDvpp
+	//PolicySidList[0] = IP6BSIDvpp
+	//PolicySidList[1] = IP6BSIDvpp
+	PolicySidList[0] = Sids[0]
+	PolicySidList[1] = Sids[1]
 
 	fmt.Println("SID0", PolicySidList[0])
 	fmt.Println("SID1", PolicySidList[1])
@@ -189,6 +195,7 @@ func main() {
 			}
 			input = strings.TrimSuffix(input, "\n")
 			policyBSID := ToVppIP6Address(net.ParseIP(input))
+			fmt.Println("BSID: ", input)
 			var Isspray bool
 			for {
 				fmt.Println("Is the policy SPRAY? [Y/N]")
@@ -287,8 +294,9 @@ func main() {
 				}
 				input = strings.TrimSuffix(input, "\n")
 				if input == "Y" {
-					err = SrPolicyAdd(ch)
-					//				err = SrPolicyAdd(ch, policyBSID, Isspray, Isencap, Fibtable, segments, Sidsweight, n)
+					//err = SrPolicyAdd(ch)
+					err = SrPolicyAdd(ch, policyBSID, Isspray, Isencap, Fibtable, segments, n)
+					//err = SrPolicyAdd(ch, policyBSID, Isspray, Isencap, Fibtable, segments, Sidsweight, n)
 					if err != nil {
 						fmt.Printf("Could not add SR Policy: %s\n", err)
 						break
