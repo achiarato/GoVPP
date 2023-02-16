@@ -12,11 +12,11 @@ import (
 	"git.fd.io/govpp.git"
 	"git.fd.io/govpp.git/api"
 
-	interfaces "mygit.com/myproject/vppbinapi/interface"
-	"mygit.com/myproject/vppbinapi/interface_types"
-	"mygit.com/myproject/vppbinapi/ip_types"
-	sr "mygit.com/myproject/vppbinapi/sr"
-	"mygit.com/myproject/vppbinapi/vpe"
+	interfaces "mygit.com/go-vpp-sr/vppbinapi/interface"
+	"mygit.com/go-vpp-sr/vppbinapi/interface_types"
+	"mygit.com/go-vpp-sr/vppbinapi/ip_types"
+	sr "mygit.com/go-vpp-sr/vppbinapi/sr"
+	"mygit.com/go-vpp-sr/vppbinapi/vpe"
 )
 
 func GetVPPVersion(ch api.Channel) error {

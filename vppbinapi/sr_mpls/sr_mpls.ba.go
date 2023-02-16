@@ -14,9 +14,9 @@ package sr_mpls
 import (
 	api "git.fd.io/govpp.git/api"
 	codec "git.fd.io/govpp.git/codec"
-	_ "mygit.com/myproject/vppbinapi/interface_types"
-	ip_types "mygit.com/myproject/vppbinapi/ip_types"
-	sr_types "mygit.com/myproject/vppbinapi/sr_types"
+	_ "mygit.com/go-vpp-sr/vppbinapi/interface_types"
+	ip_types "mygit.com/go-vpp-sr/vppbinapi/ip_types"
+	sr_types "mygit.com/go-vpp-sr/vppbinapi/sr_types"
 )
 
 // This is a compile-time assertion to ensure that this generated file

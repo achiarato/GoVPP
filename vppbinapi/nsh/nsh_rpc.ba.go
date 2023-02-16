@@ -8,7 +8,7 @@ import (
 	"io"
 
 	api "git.fd.io/govpp.git/api"
-	memclnt "mygit.com/myproject/vppbinapi/memclnt"
+	memclnt "mygit.com/go-vpp-sr/vppbinapi/memclnt"
 )
 
 // RPCService defines RPC service nsh.

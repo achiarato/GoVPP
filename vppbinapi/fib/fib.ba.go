@@ -15,8 +15,8 @@ package fib
 import (
 	api "git.fd.io/govpp.git/api"
 	codec "git.fd.io/govpp.git/codec"
-	_ "mygit.com/myproject/vppbinapi/fib_types"
-	_ "mygit.com/myproject/vppbinapi/ip_types"
+	_ "mygit.com/go-vpp-sr/vppbinapi/fib_types"
+	_ "mygit.com/go-vpp-sr/vppbinapi/ip_types"
 )
 
 // This is a compile-time assertion to ensure that this generated file

@@ -1,4 +1,4 @@
-module mygit.com/myproject
+module mygit.com/go-vpp-sr
 
 go 1.19
 

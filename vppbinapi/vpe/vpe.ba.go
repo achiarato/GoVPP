@@ -14,7 +14,7 @@ package vpe
 import (
 	api "git.fd.io/govpp.git/api"
 	codec "git.fd.io/govpp.git/codec"
-	vpe_types "mygit.com/myproject/vppbinapi/vpe_types"
+	vpe_types "mygit.com/go-vpp-sr/vppbinapi/vpe_types"
 )
 
 // This is a compile-time assertion to ensure that this generated file

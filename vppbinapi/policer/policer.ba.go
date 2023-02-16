@@ -14,8 +14,8 @@ package policer
 import (
 	api "git.fd.io/govpp.git/api"
 	codec "git.fd.io/govpp.git/codec"
-	interface_types "mygit.com/myproject/vppbinapi/interface_types"
-	policer_types "mygit.com/myproject/vppbinapi/policer_types"
+	interface_types "mygit.com/go-vpp-sr/vppbinapi/interface_types"
+	policer_types "mygit.com/go-vpp-sr/vppbinapi/policer_types"
 )
 
 // This is a compile-time assertion to ensure that this generated file

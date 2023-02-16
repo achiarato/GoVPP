@@ -17,7 +17,7 @@ import (
 
 	api "git.fd.io/govpp.git/api"
 	codec "git.fd.io/govpp.git/codec"
-	ip_types "mygit.com/myproject/vppbinapi/ip_types"
+	ip_types "mygit.com/go-vpp-sr/vppbinapi/ip_types"
 )
 
 // This is a compile-time assertion to ensure that this generated file
