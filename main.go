@@ -100,20 +100,16 @@ func ToVppIP6Address(addr net.IP) ip_types.IP6Address {
 	return ip
 }
 
-//func SrPolicyAdd(ch api.Channel, Bsid ip_types.IP6Address, Isspray bool, Isencap bool, Fibtable int, Sids [16]ip_types.IP6Address, Sidslen int) error {
 func SrPolicyAdd(ch api.Channel, Bsid ip_types.IP6Address, Isspray bool, Isencap bool, Fibtable int, Sids [16]ip_types.IP6Address, Sidslen int) error {
 
-	//func SrPolicyAdd(ch api.Channel) error {
 	fmt.Println("Adding SRv6 Policy")
 
-	//IP6BSID := net.ParseIP("2001::3")
-	//IP6BSIDvpp := ToVppIP6Address(IP6BSID)
-	IP6BSIDvpp := (Bsid)
+	BSID := (Bsid)
 	PolicyBsid := ip_types.IP6Address{}
-	PolicyBsid = IP6BSIDvpp
+	PolicyBsid = BSID
+	FwdTable := Fibtable
+	FibTable := uint32(FwdTable)
 	PolicySidList := [16]ip_types.IP6Address{}
-	//PolicySidList[0] = IP6BSIDvpp
-	//PolicySidList[1] = IP6BSIDvpp
 	PolicySidList[0] = Sids[0]
 	PolicySidList[1] = Sids[1]
 	PolicySidList[2] = Sids[0]
@@ -128,9 +124,9 @@ func SrPolicyAdd(ch api.Channel, Bsid ip_types.IP6Address, Isspray bool, Isencap
 
 	request := &sr.SrPolicyAdd{
 		BsidAddr: PolicyBsid,
-		IsSpray:  false,
-		IsEncap:  true,
-		FibTable: 0,
+		IsSpray:  Isspray,
+		IsEncap:  Isencap,
+		FibTable: FibTable,
 		Sids: sr.Srv6SidList{
 			NumSids: 2,
 			Weight:  1,
