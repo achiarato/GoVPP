@@ -124,9 +124,9 @@ func SrPolicyAdd(ch api.Channel, Bsid ip_types.IP6Address, Isspray bool, Isencap
 		IsEncap:  Isencap,
 		FibTable: FibTable,
 		Sids: sr.Srv6SidList{
-			NumSids: 4,
-			Weight:  1,
-			Sids:    PolicySidList,
+			//NumSids: 2,
+			Weight: 1,
+			Sids:   PolicySidList,
 		},
 	}
 	response := &sr.SrPolicyAddReply{}
