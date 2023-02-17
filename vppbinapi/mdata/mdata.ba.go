@@ -14,7 +14,7 @@ package mdata
 import (
 	api "git.fd.io/govpp.git/api"
 	codec "git.fd.io/govpp.git/codec"
-	_ "mygit.com/go-vpp-sr/vppbinapi/interface_types"
+	_ "github.com/brmcdoug/go-vpp-sr/vppbinapi/interface_types"
 )
 
 // This is a compile-time assertion to ensure that this generated file

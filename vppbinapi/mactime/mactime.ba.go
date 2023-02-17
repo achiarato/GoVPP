@@ -15,8 +15,8 @@ package mactime
 import (
 	api "git.fd.io/govpp.git/api"
 	codec "git.fd.io/govpp.git/codec"
-	ethernet_types "mygit.com/go-vpp-sr/vppbinapi/ethernet_types"
-	interface_types "mygit.com/go-vpp-sr/vppbinapi/interface_types"
+	ethernet_types "github.com/brmcdoug/go-vpp-sr/vppbinapi/ethernet_types"
+	interface_types "github.com/brmcdoug/go-vpp-sr/vppbinapi/interface_types"
 )
 
 // This is a compile-time assertion to ensure that this generated file

@@ -14,7 +14,7 @@ package tcp
 import (
 	api "git.fd.io/govpp.git/api"
 	codec "git.fd.io/govpp.git/codec"
-	ip_types "mygit.com/go-vpp-sr/vppbinapi/ip_types"
+	ip_types "github.com/brmcdoug/go-vpp-sr/vppbinapi/ip_types"
 )
 
 // This is a compile-time assertion to ensure that this generated file

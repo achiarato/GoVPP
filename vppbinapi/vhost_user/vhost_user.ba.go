@@ -14,9 +14,9 @@ package vhost_user
 import (
 	api "git.fd.io/govpp.git/api"
 	codec "git.fd.io/govpp.git/codec"
-	ethernet_types "mygit.com/go-vpp-sr/vppbinapi/ethernet_types"
-	interface_types "mygit.com/go-vpp-sr/vppbinapi/interface_types"
-	virtio_types "mygit.com/go-vpp-sr/vppbinapi/virtio_types"
+	ethernet_types "github.com/brmcdoug/go-vpp-sr/vppbinapi/ethernet_types"
+	interface_types "github.com/brmcdoug/go-vpp-sr/vppbinapi/interface_types"
+	virtio_types "github.com/brmcdoug/go-vpp-sr/vppbinapi/virtio_types"
 )
 
 // This is a compile-time assertion to ensure that this generated file
