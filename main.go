@@ -280,7 +280,7 @@ func main() {
 			fmt.Printf("    IsEncap:   %+v\n", Isencap)
 			fmt.Printf("    Fib Table: %+v\n", Fibtable)
 			fmt.Printf("    SID List:  %+v\n", segments)
-			fmt.Printf("    SID List length:  %+v\n", n)
+			fmt.Printf("    SID List length:  %+v\n", i)
 			fmt.Println()
 			for {
 				fmt.Println("Please confirm that this is the policy you want to add: [Y/N]")
@@ -293,7 +293,7 @@ func main() {
 				input = strings.TrimSuffix(input, "\n")
 				if input == "Y" {
 					//err = SrPolicyAdd(ch)
-					err = SrPolicyAdd(ch, policyBSID, Isspray, Isencap, Fibtable, segments, n)
+					err = SrPolicyAdd(ch, policyBSID, Isspray, Isencap, Fibtable, segments, i)
 					//err = SrPolicyAdd(ch, policyBSID, Isspray, Isencap, Fibtable, segments, Sidsweight, n)
 					if err != nil {
 						fmt.Printf("Could not add SR Policy: %s\n", err)
