@@ -280,7 +280,7 @@ func main() {
 			fmt.Printf("    IsEncap:   %+v\n", Isencap)
 			fmt.Printf("    Fib Table: %+v\n", Fibtable)
 			fmt.Printf("    SID List:  %+v\n", segments)
-			fmt.Printf("    SID List:  %T\n", segments)
+			fmt.Printf("    SID List length:  %+v\n", n)
 			fmt.Println()
 			for {
 				fmt.Println("Please confirm that this is the policy you want to add: [Y/N]")
