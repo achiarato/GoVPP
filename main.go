@@ -124,9 +124,9 @@ func SrPolicyAdd(ch api.Channel, Bsid ip_types.IP6Address, Isspray bool, Isencap
 		IsEncap:  Isencap,
 		FibTable: FibTable,
 		Sids: sr.Srv6SidList{
-			//NumSids: 2,
-			Weight: 1,
-			Sids:   PolicySidList,
+			NumSids: 2,
+			Weight:  1,
+			Sids:    PolicySidList,
 		},
 	}
 	response := &sr.SrPolicyAddReply{}
@@ -265,11 +265,13 @@ func main() {
 				}
 				if len(strings.TrimSpace(input)) == 0 {
 					input = strings.TrimSuffix(input, "\n")
-					fmt.Println("SID List completed!")
+					fmt.Println("SID List completed!", input)
 					break
 				}
 				input = strings.TrimSuffix(input, "\n")
 				segments[i] = ToVppIP6Address(net.ParseIP(input))
+				fmt.Println("segments [i]: ", i)
+				fmt.Println("segments [n]: ", n)
 				i++
 				n++
 			}
@@ -279,6 +281,7 @@ func main() {
 			fmt.Printf("    IsEncap:   %+v\n", Isencap)
 			fmt.Printf("    Fib Table: %+v\n", Fibtable)
 			fmt.Printf("    SID List:  %+v\n", segments)
+			fmt.Printf("    SID List:  %T\n", segments)
 			fmt.Println()
 			for {
 				fmt.Println("Please confirm that this is the policy you want to add: [Y/N]")
