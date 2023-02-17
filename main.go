@@ -110,10 +110,10 @@ func SrPolicyAdd(ch api.Channel, Bsid ip_types.IP6Address, Isspray bool, Isencap
 	FwdTable := Fibtable
 	FibTable := uint32(FwdTable)
 	PolicySidList := [16]ip_types.IP6Address{}
-	PolicySidList[0] = Sids[0]
-	PolicySidList[1] = Sids[1]
-	PolicySidList[2] = Sids[2]
-	PolicySidList[3] = Sids[3]
+	// PolicySidList[0] = Sids[0]
+	// PolicySidList[1] = Sids[1]
+	// PolicySidList[2] = Sids[2]
+	// PolicySidList[3] = Sids[3]
 
 	fmt.Println("SID0", PolicySidList[0])
 	fmt.Println("SID1", PolicySidList[1])
@@ -124,7 +124,7 @@ func SrPolicyAdd(ch api.Channel, Bsid ip_types.IP6Address, Isspray bool, Isencap
 		IsEncap:  Isencap,
 		FibTable: FibTable,
 		Sids: sr.Srv6SidList{
-			NumSids: 2,
+			NumSids: uint8(Sidslen),
 			Weight:  1,
 			Sids:    PolicySidList,
 		},
@@ -268,9 +268,7 @@ func main() {
 					break
 				}
 				input = strings.TrimSuffix(input, "\n")
-				fmt.Println("input", input)
 				segments[i] = ToVppIP6Address(net.ParseIP(input))
-				fmt.Println("segments line 272", segments[i])
 				i++
 				n++
 			}
