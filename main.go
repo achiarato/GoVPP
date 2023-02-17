@@ -268,12 +268,11 @@ func main() {
 					break
 				}
 				input = strings.TrimSuffix(input, "\n")
+				fmt.Println("input", input)
 				segments[i] = ToVppIP6Address(net.ParseIP(input))
-				fmt.Println("segments line 272", segments)
+				fmt.Println("segments line 272", segments[i])
 				i++
 				n++
-				fmt.Println("segments line 275", segments[i])
-				fmt.Println("segments line 275", segments[n])
 			}
 			fmt.Printf(" - SR Policy Ready to be added:\n")
 			fmt.Printf("    BSID:      %+v\n", policyBSID)
