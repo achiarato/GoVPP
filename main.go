@@ -96,7 +96,6 @@ func InterfaceDump(ch api.Channel) error {
 func ToVppIP6Address(addr net.IP) ip_types.IP6Address {
 	ip := [16]uint8{}
 	copy(ip[:], addr)
-	fmt.Println("ToVppIP6Address", ip)
 	return ip
 }
 
@@ -109,14 +108,6 @@ func SrPolicyAdd(ch api.Channel, Bsid ip_types.IP6Address, Isspray bool, Isencap
 	PolicyBsid = BSID
 	FwdTable := Fibtable
 	FibTable := uint32(FwdTable)
-	PolicySidList := [16]ip_types.IP6Address{}
-	// PolicySidList[0] = Sids[0]
-	// PolicySidList[1] = Sids[1]
-	// PolicySidList[2] = Sids[2]
-	// PolicySidList[3] = Sids[3]
-
-	fmt.Println("SID0", PolicySidList[0])
-	fmt.Println("SID1", PolicySidList[1])
 
 	request := &sr.SrPolicyAdd{
 		BsidAddr: PolicyBsid,
@@ -126,8 +117,7 @@ func SrPolicyAdd(ch api.Channel, Bsid ip_types.IP6Address, Isspray bool, Isencap
 		Sids: sr.Srv6SidList{
 			NumSids: uint8(Sidslen),
 			Weight:  1,
-			//Sids:    PolicySidList,
-			Sids: Sids,
+			Sids:    Sids,
 		},
 	}
 	response := &sr.SrPolicyAddReply{}
@@ -136,7 +126,7 @@ func SrPolicyAdd(ch api.Channel, Bsid ip_types.IP6Address, Isspray bool, Isencap
 		return err
 	}
 	time.Sleep(1 * time.Second)
-	fmt.Println("SRv6 Policy added!")
+	fmt.Println("SRv6 Policy added: ", Sids)
 	return nil
 }
 
