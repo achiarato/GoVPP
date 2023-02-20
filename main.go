@@ -20,7 +20,8 @@ import (
 )
 
 func GetVPPVersion(ch api.Channel) error {
-	fmt.Println("Get VPP Version...")
+	fmt.Println("Get VPP Version")
+	time.Sleep(1*time.Second)
 	request := &vpe.ShowVersion{}
 	reply := &vpe.ShowVersionReply{}
 	err := ch.SendRequest(request).ReceiveReply(reply)
@@ -66,6 +67,7 @@ func SrPolicyDump(ch api.Channel) error {
 
 func InterfaceDump(ch api.Channel) error {
 	fmt.Println("Dumping interfaces")
+	time.Sleep(1*time.Second)
 
 	n := 0
 	reqCtx := ch.SendMultiRequest(&interfaces.SwInterfaceDump{
@@ -81,13 +83,8 @@ func InterfaceDump(ch api.Channel) error {
 			return err
 		}
 		n++
-		fmt.Printf(" - interface #%d: %+v", n, msg)
-		fmt.Printf(" - interface name: %s", msg.InterfaceName)
-		macAddr, err := net.ParseMAC(msg.L2Address.String())
-		if err != nil {
-			return err
-		}
-		fmt.Printf(" - interface MAC Address: %s", macAddr)
+		fmt.Printf(" - interface #%d: %+v\n", n, msg)
+		fmt.Printf(" - interface name: %s\n", msg.InterfaceName)
 		fmt.Println()
 	}
 	return nil
@@ -146,18 +143,14 @@ func main() {
 		fmt.Printf("Could not open API channel: %s\n", err)
 		os.Exit(1)
 	}
-
-	time.Sleep(500 * time.Millisecond)
-	fmt.Println()
-	err = InterfaceDump(ch)
-	if err != nil {
-		fmt.Printf("Could not dump interfaces: %s\n", err)
-		os.Exit(1)
-	}
+	time.Sleep(1 * time.Second)
+	fmt.Println("GoVPP Ready to Rock!")
+	time.Sleep(1*time.Second)
 	for {
 		time.Sleep(500 * time.Millisecond)
 		fmt.Println()
 		fmt.Println("Please specify your desired action:")
+		fmt.Println("If you want to get VPP detailes, type DET")
 		fmt.Println("If you want to add SRv6 policy, type ADD")
 		fmt.Println("If you want to show SRv6 policy, type SHOW")
 		fmt.Println("If you want to quit, type QUIT")
@@ -170,7 +163,21 @@ func main() {
 		}
 		input = strings.TrimSuffix(input, "\n")
 
-		if input == "ADD" {
+		if input == "DET" {
+			fmt.Println("Getting VPP Details")
+			time.Sleep(500 * time.Millisecond)
+			err = GetVPPVersion(ch)
+			if err != nil {
+				fmt.Println("Cannot get the VPP Version: %s\n", err)
+				break
+			}
+			time.Sleep(500 * time.Millisecond)
+			err = InterfaceDump(ch)
+			if err != nil {
+				fmt.Printf("Could not dump interfaces: %s\n", err)
+				break
+			}
+		} else if input == "ADD" {
 			fmt.Println("Great! New SRv6 Policy on its way!")
 			time.Sleep(1 * time.Second)
 			fmt.Println("Please specify the BSID:")
