@@ -15,6 +15,7 @@ import (
 	interfaces "github.com/brmcdoug/go-vpp-sr/vppbinapi/interface"
 	"github.com/brmcdoug/go-vpp-sr/vppbinapi/interface_types"
 	"github.com/brmcdoug/go-vpp-sr/vppbinapi/ip_types"
+	"github.com/brmcdoug/go-vpp-sr/vppbinapi/sr_types"
 	sr "github.com/brmcdoug/go-vpp-sr/vppbinapi/sr"
 	"github.com/brmcdoug/go-vpp-sr/vppbinapi/vpe"
 )
@@ -96,6 +97,59 @@ func ToVppIP6Address(addr net.IP) ip_types.IP6Address {
 	return ip
 }
 
+func ToVppAddress(addr net.IP) ip_types.Address {
+	a := ip_types.Address{}
+	if addr.To4() == nil {
+		a.Af = ip_types.ADDRESS_IP6
+		ip := [16]uint8{}
+		copy(ip[:], addr)
+		a.Un = ip_types.AddressUnionIP6(ip)
+	} else {
+		a.Af = ip_types.ADDRESS_IP4
+		ip := [4]uint8{}
+		copy(ip[:], addr.To4())
+		a.Un = ip_types.AddressUnionIP4(ip)
+	}
+	return a
+}
+
+func ToVppPrefix(prefix *net.IPNet) ip_types.Prefix {
+	len, _ := prefix.Mask.Size()
+	r := ip_types.Prefix{
+		Address: ToVppAddress(prefix.IP),
+		Len:     uint8(len),
+	}
+	return r
+}
+
+func SrSteeringAddDel(ch api.Channel, Bsid ip_types.IP6Address, Traffic ip_types.Prefix) error {
+	fmt.Println("Adding SR Steer policy")
+
+	var traffic_type sr_types.SrSteer
+	if Traffic.Address.Af == ip_types.ADDRESS_IP4 {
+		traffic_type = 4
+	} else {
+		traffic_type = 6
+	}
+
+	request := &sr.SrSteeringAddDel{
+		BsidAddr: Bsid,
+		TableID: 0,
+		Prefix: Traffic,
+		SwIfIndex: 2,
+		TrafficType: traffic_type,
+	}
+
+	response := &sr.SrSteeringAddDelReply{}
+	err := ch.SendRequest(request).ReceiveReply(response)
+	if err != nil {
+		return err
+	}
+	time.Sleep(1 * time.Second)
+	fmt.Println("SRv6 Steer Policy added!")
+	return nil
+}
+
 func SrPolicyAdd(ch api.Channel, Bsid ip_types.IP6Address, Isspray bool, Isencap bool, Fibtable int, Sids [16]ip_types.IP6Address, Sidslen int) error {
 
 	fmt.Println("Adding SRv6 Policy")
@@ -143,15 +197,16 @@ func main() {
 		fmt.Printf("Could not open API channel: %s\n", err)
 		os.Exit(1)
 	}
-	time.Sleep(1 * time.Second)
+	time.Sleep(500 * time.Millisecond)
 	fmt.Println("GoVPP Ready to Rock!")
-	time.Sleep(1*time.Second)
+	time.Sleep(500 * time.Millisecond)
 	for {
 		time.Sleep(500 * time.Millisecond)
 		fmt.Println()
 		fmt.Println("Please specify your desired action:")
 		fmt.Println("If you want to get VPP detailes, type DET")
 		fmt.Println("If you want to add SRv6 policy, type ADD")
+		fmt.Println("If you want to add SR Steer policy, type STEER")
 		fmt.Println("If you want to show SRv6 policy, type SHOW")
 		fmt.Println("If you want to quit, type QUIT")
 		reader := bufio.NewReader(os.Stdin)
@@ -303,6 +358,37 @@ func main() {
 				fmt.Println("Please type Y or N")
 				continue
 			}
+		} else if input == "STEER" {
+			fmt.Println("Great! New SR Steer Policy on its way!")
+			time.Sleep(1 * time.Second)
+			fmt.Println("Please specify the BSID of the SR policy:")
+			reader := bufio.NewReader(os.Stdin)
+			input, err := reader.ReadString('\n')
+			if err != nil {
+				fmt.Println("An error occured while reading input. Please try again", err)
+				continue
+			}
+			input = strings.TrimSuffix(input, "\n")
+			BSID := ToVppIP6Address(net.ParseIP(input))
+			fmt.Println("BSID: %s/n", BSID)
+			fmt.Println("Please specify the traffic to steer [Addr/Mask]:")
+			reader = bufio.NewReader(os.Stdin)
+			input, err = reader.ReadString('\n')
+			if err != nil {
+				fmt.Println("An error occured while reading input. Please try again", err)
+				continue
+			}
+			input = strings.TrimSuffix(input, "\n")
+			addr, network, err := net.ParseCIDR(input)
+			_ = addr
+			traffic := ToVppPrefix(network)
+			fmt.Printf("Traffic: %s \n", traffic)
+			err = SrSteeringAddDel(ch, BSID, traffic)
+			if err != nil {
+				fmt.Printf("Could not add SR Steer Policy: %s\n", err)
+				continue
+			}
+			continue
 		} else if input == "SHOW" {
 			err = SrPolicyDump(ch)
 			if err != nil {
