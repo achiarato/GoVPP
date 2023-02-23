@@ -14,10 +14,10 @@ package flow
 import (
 	api "git.fd.io/govpp.git/api"
 	codec "git.fd.io/govpp.git/codec"
-	_ "github.com/brmcdoug/go-vpp-sr/vppbinapi/ethernet_types"
-	flow_types "github.com/brmcdoug/go-vpp-sr/vppbinapi/flow_types"
-	_ "github.com/brmcdoug/go-vpp-sr/vppbinapi/interface_types"
-	_ "github.com/brmcdoug/go-vpp-sr/vppbinapi/ip_types"
+	_ "github.com/achiarato/GoVPP/vppbinapi/ethernet_types"
+	flow_types "github.com/achiarato/GoVPP/vppbinapi/flow_types"
+	_ "github.com/achiarato/GoVPP/vppbinapi/interface_types"
+	_ "github.com/achiarato/GoVPP/vppbinapi/ip_types"
 )
 
 // This is a compile-time assertion to ensure that this generated file

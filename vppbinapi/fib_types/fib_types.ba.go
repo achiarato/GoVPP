@@ -16,7 +16,7 @@ import (
 	"strconv"
 
 	api "git.fd.io/govpp.git/api"
-	ip_types "github.com/brmcdoug/go-vpp-sr/vppbinapi/ip_types"
+	ip_types "github.com/achiarato/GoVPP/vppbinapi/ip_types"
 )
 
 // This is a compile-time assertion to ensure that this generated file
