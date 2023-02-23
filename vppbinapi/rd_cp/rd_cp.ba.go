@@ -14,7 +14,7 @@ package rd_cp
 import (
 	api "git.fd.io/govpp.git/api"
 	codec "git.fd.io/govpp.git/codec"
-	interface_types "github.com/brmcdoug/go-vpp-sr/vppbinapi/interface_types"
+	interface_types "github.com/achiarato/GoVPP/vppbinapi/interface_types"
 )
 
 // This is a compile-time assertion to ensure that this generated file

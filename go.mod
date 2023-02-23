@@ -1,4 +1,4 @@
-module github.com/brmcdoug/go-vpp-sr
+module github.com/achiarato/GoVPP
 
 go 1.19
 

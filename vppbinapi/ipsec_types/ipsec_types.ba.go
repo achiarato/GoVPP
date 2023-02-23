@@ -16,9 +16,9 @@ import (
 	"strconv"
 
 	api "git.fd.io/govpp.git/api"
-	_ "github.com/brmcdoug/go-vpp-sr/vppbinapi/interface_types"
-	ip_types "github.com/brmcdoug/go-vpp-sr/vppbinapi/ip_types"
-	tunnel_types "github.com/brmcdoug/go-vpp-sr/vppbinapi/tunnel_types"
+	_ "github.com/achiarato/GoVPP/vppbinapi/interface_types"
+	ip_types "github.com/achiarato/GoVPP/vppbinapi/ip_types"
+	tunnel_types "github.com/achiarato/GoVPP/vppbinapi/tunnel_types"
 )
 
 // This is a compile-time assertion to ensure that this generated file

@@ -12,17 +12,17 @@ import (
 	"git.fd.io/govpp.git"
 	"git.fd.io/govpp.git/api"
 
-	interfaces "github.com/brmcdoug/go-vpp-sr/vppbinapi/interface"
-	"github.com/brmcdoug/go-vpp-sr/vppbinapi/interface_types"
-	"github.com/brmcdoug/go-vpp-sr/vppbinapi/ip_types"
-	"github.com/brmcdoug/go-vpp-sr/vppbinapi/sr_types"
-	sr "github.com/brmcdoug/go-vpp-sr/vppbinapi/sr"
-	"github.com/brmcdoug/go-vpp-sr/vppbinapi/vpe"
+	interfaces "github.com/achiarato/GoVPP/vppbinapi/interface"
+	"github.com/achiarato/GoVPP/vppbinapi/interface_types"
+	"github.com/achiarato/GoVPP/vppbinapi/ip_types"
+	sr "github.com/achiarato/GoVPP/vppbinapi/sr"
+	"github.com/achiarato/GoVPP/vppbinapi/sr_types"
+	"github.com/achiarato/GoVPP/vppbinapi/vpe"
 )
 
 func GetVPPVersion(ch api.Channel) error {
 	fmt.Println("Get VPP Version")
-	time.Sleep(1*time.Second)
+	time.Sleep(1 * time.Second)
 	request := &vpe.ShowVersion{}
 	reply := &vpe.ShowVersionReply{}
 	err := ch.SendRequest(request).ReceiveReply(reply)
@@ -68,7 +68,7 @@ func SrPolicyDump(ch api.Channel) error {
 
 func InterfaceDump(ch api.Channel) error {
 	fmt.Println("Dumping interfaces")
-	time.Sleep(1*time.Second)
+	time.Sleep(1 * time.Second)
 
 	n := 0
 	reqCtx := ch.SendMultiRequest(&interfaces.SwInterfaceDump{
@@ -133,10 +133,10 @@ func SrSteeringAddDel(ch api.Channel, Bsid ip_types.IP6Address, Traffic ip_types
 	}
 
 	request := &sr.SrSteeringAddDel{
-		BsidAddr: Bsid,
-		TableID: 0,
-		Prefix: Traffic,
-		SwIfIndex: 2,
+		BsidAddr:    Bsid,
+		TableID:     0,
+		Prefix:      Traffic,
+		SwIfIndex:   2,
 		TrafficType: traffic_type,
 	}
 

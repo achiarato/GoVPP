@@ -14,9 +14,9 @@ package lb
 import (
 	api "git.fd.io/govpp.git/api"
 	codec "git.fd.io/govpp.git/codec"
-	interface_types "github.com/brmcdoug/go-vpp-sr/vppbinapi/interface_types"
-	ip_types "github.com/brmcdoug/go-vpp-sr/vppbinapi/ip_types"
-	lb_types "github.com/brmcdoug/go-vpp-sr/vppbinapi/lb_types"
+	interface_types "github.com/achiarato/GoVPP/vppbinapi/interface_types"
+	ip_types "github.com/achiarato/GoVPP/vppbinapi/ip_types"
+	lb_types "github.com/achiarato/GoVPP/vppbinapi/lb_types"
 )
 
 // This is a compile-time assertion to ensure that this generated file
