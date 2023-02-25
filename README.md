@@ -1,13 +1,13 @@
 # GoVPP for SRv6
 
-Uses VPP's go-vpp API to provision SRv6 policies and Steer Traffic 
+Uses GO client interacting with VPP's API to provision SRv6 policies and Steer Traffic
+GoVPP: https://wiki.fd.io/view/GoVPP
 
 Tested with golang 1.19.5
 
 Prerequisites:
 - Golang
-- VPP [to be detailed]
-- ...
+- VPP [https://wiki.fd.io/view/VPP]
 
 In order to import the code to your personale GitHub repository:
 1. Clone the Repository into your personal GitHub
