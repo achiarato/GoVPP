@@ -1,6 +1,7 @@
 # GoVPP for SRv6
 
 Uses GO client interacting with VPP's API to provision SRv6 policies and Steer Traffic
+
 GoVPP: https://wiki.fd.io/view/GoVPP
 
 Tested with golang 1.19.5
@@ -36,7 +37,11 @@ If you want to quit, type QUIT
 ```
 
 DET: Provide details for VPP Version and VPP Interfaces
+
 ADD: Define and Provision SRv6 Policy
+
 STEER: Define and Steer Traffic to existing SRv6 Policy
+
 SHOW: Show existing SRv6 Policy
+
 QUIT: Close the GoVPP session
