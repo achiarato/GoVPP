@@ -10,7 +10,7 @@ Prerequisites:
 - ...
 
 In order to import the code to your personale GitHub repository:
-1. Clone the Repository into your local environment
+1. Clone the Repository into your personal GitHub
 2. Open the code in code editing application (ex. Visual Studio)
 3. Make your code changes
 4. Find and Replace all the achiarato/GoVPP links with your GitHub repository path
