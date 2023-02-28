@@ -2,18 +2,17 @@
 
 Uses GO client interacting with VPP's API to provision SRv6 policies and Steer Traffic.
 
-Quick Demo (4 min):
+### Quick Demo (4 min):
 
 https://cisco.webex.com/cisco/ldr.php?RCID=32dd1b9b654e2755b8255430e53bbbd0
 
 Pswd: yT7PSs9a
 
+### Links:
+- GoVPP: https://wiki.fd.io/view/GoVPP
+- Tested with golang 1.19.5
 
-GoVPP: https://wiki.fd.io/view/GoVPP
-
-Tested with golang 1.19.5
-
-Prerequisites:
+### Prerequisites:
 - Golang
 - VPP [https://wiki.fd.io/view/VPP]
 
